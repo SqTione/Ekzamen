@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 	<meta charset="UTF-8">
@@ -17,7 +17,7 @@
 	<div class="app">
 		<main class="main container auth__container">
 			<!-- Форма регистрации -->
-			<form action="../services/LoginService.php" method='post' class='auth__form form' id='register-form'>
+			<form action="../services/RegisterService.php" method='post' class='auth__form form' id='register-form' enctype="multipart/form-data">
 				<div class="form__header">
 					<h1>Регистрация</h1>
 					<p>Уже зарегистрированы? <a href="./login.php">Войдите!</a></p>
@@ -38,13 +38,33 @@
 					<input type="email" class="form__input" placeholder='Email' name="email" required id='input--email'>
 					<p class="error-message">*Поле обязательно для заполнения. <br> Введите корректный Email-адрес </p>
 
+					<label for="input--phone" style='display: none;'>Телефон</label>
+					<input type="tel" class="form__input" placeholder='Номер телефона' name="phone" required pattern="^(\+7|8)[\d]{10}$" id='input--phone'>
+					<p class="error-message">*Поле обязательно для заполнения. <br> Введите корректный номер телефона (+7(8)9123456789) </p>
+
+					<label for="input--dob" style='display: none;'>Дата рождения</label>
+					<input type="date" class="form__input" name="dob" required id="input--dob" max="" />
+					<p class="error-message">*Поле обязательно для заполнения. <br> Укажите валидную дату рождения</p>
+
+					<label for="input--gender" style='display: none;'>Пол</label>
+					<select class="form__input" name="gender" required id="input--gender">
+						<option value="">Выберите пол</option>
+						<option value="male">Мужской</option>
+						<option value="female">Женский</option>
+					</select>
+					<p class="error-message">*Поле обязательно для заполнения.</p>
+
+					<label for="input--certificate" style='display: none;'>Медицинская справка (PDF)</label>
+					<input type="file" class="form__input" name="certificate" accept="application/pdf" required id="input--certificate">
+					<p class="error-message">*Поле обязательно для заполнения. <br> Загрузите скан медицинской справки в формате PDF.</p>
+
 					<label for="input--password" style='display: none;'>Пароль</label>
 					<input type="password" class="form__input" placeholder='Пароль' name="password" required minlength="8"
 						pattern="^[A-Za-z0-9!@#$%^&*()_+={}\[\]:;,.<>?/-]*$" id='input--password'>
 					<p class="error-message">*Поле обязательно для заполнения. <br> Пароль должен содержать минимум 8 символов</p>
 
 					<label for="input--password-repeat" style='display: none;'>Повтор пароля</label>
-					<input type="password" class="form__input" placeholder='Повтор пароля' name="password" required minlength="8"
+					<input type="password" class="form__input" placeholder='Повтор пароля' name="password_repeat" required minlength="8"
 						pattern="^[A-Za-z0-9!@#$%^&*()_+={}\[\]:;,.<>?/-]*$" id='input--password-repeat'>
 					<p class="error-message">*Поле обязательно для заполнения. <br> Пароли не совпадают</p>
 				</div>
@@ -57,6 +77,11 @@
 
 	<script>
   document.addEventListener('DOMContentLoaded', () => {
+		// Установка максимальной даты для поля Дата рождения
+		const today = new Date().toISOString().split('T')[0];
+		document.getElementById('input--dob').setAttribute('max', today);
+
+		// Проверка совпадения паролей
     let password = document.getElementById('input--password');
     let passwordRepeat = document.getElementById('input--password-repeat');
     let form = document.getElementById('register-form');
@@ -79,6 +104,13 @@
       }
     });
   });
+
+	form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        alert('Пожалуйста, исправьте ошибки в форме');
+      }
+    });
 </script>
 
 	<!-- Подвал -->
