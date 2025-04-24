@@ -167,3 +167,74 @@ a {
 .auth__form {
 	width: 600px;
 }
+
+/* Страница профиль */
+.profile {
+	margin-top: 3.75rem;
+}
+
+.profile h1 {
+	margin-bottom: 1.25rem;
+	font-size: 1.75rem;
+	color: var(--tertiary);
+}
+
+.profile__data {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+/* Список заявок */
+h2 {
+	margin-bottom: 1rem;
+	color: var(--tertiary);
+}
+
+section {
+	padding-bottom: 2rem;
+}
+
+.applications__container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	gap: 1rem;
+}
+
+.application {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 0.75rem 1.25rem;
+	background-color: var(--grey);
+	border-radius: 6px;
+}
+
+.application__status {
+	padding: 0.5rem 0.75rem;
+	width: max-content;
+	text-align: center;
+	color: var(--white);
+	background-color: var(--primary);
+	border-radius: 999px;
+}
+
+.application__status--in-work {
+	background-color: var(--secondary);
+}
+
+.application__status--applied {
+	background-color: #22b83ba2;
+}
+
+.application__status--denied {
+	background-color: #f5323ca2;
+}
+
+.create-application {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 60px auto;
+}

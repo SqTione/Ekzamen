@@ -5,13 +5,13 @@ require_once 'db_connection.php';
 // Функция для выполнения SQL-запросов
 function executeQuery($sql)
 {
-	global $pdo;
-	try {
-		$pdo->exec($sql);
-	} catch (PDOException $e) {
-		echo "Ошибка выполнения запроса: " . $e->getMessage();
-		exit;
-	}
+    global $pdo;
+    try {
+        $pdo->exec($sql);
+    } catch (PDOException $e) {
+        echo "Ошибка выполнения запроса: " . $e->getMessage();
+        exit;
+    }
 }
 
 // Создание таблицы для ролей
@@ -51,6 +51,40 @@ CREATE TABLE IF NOT EXISTS user (
 );
 ";
 executeQuery($sqlCreateUserTable);
+
+// Создание таблицы для статусов заявок
+$sqlCreateApplicationStatusTable = "
+CREATE TABLE IF NOT EXISTS application_status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+";
+executeQuery($sqlCreateApplicationStatusTable);
+
+// Заполнение статусами таблицы
+$sqlInsertStatuses = "
+INSERT INTO application_status (name) 
+VALUES 
+('Новое'),
+('В работе'),
+('Одобрено'),
+('Отклонено')
+ON DUPLICATE KEY UPDATE name=name;
+";
+executeQuery($sqlInsertStatuses);
+
+// Создание таблицы для заявок
+$sqlCreateApplicationTable = "
+CREATE TABLE IF NOT EXISTS application (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    visit_date DATE NOT NULL,
+    user_id INT NOT NULL,
+    status_id INT NOT NULL DEFAULT 1,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (status_id) REFERENCES application_status(id) ON DELETE CASCADE
+);
+";
+executeQuery($sqlCreateApplicationTable);
 
 echo "База данных и таблицы успешно созданы!";
 ?>
