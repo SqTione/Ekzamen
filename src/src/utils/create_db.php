@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS user (
     email VARCHAR(255) NOT NULL UNIQUE,
     phone VARCHAR(20),
     dob DATE NOT NULL,
-    gender ENUM('male', 'female', 'other') NOT NULL,
+    gender ENUM('Мужчина', 'Женщина') NOT NULL,
     password VARCHAR(255) NOT NULL,
     certificate LONGBLOB,
     role_id INT NOT NULL,
