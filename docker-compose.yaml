@@ -8,6 +8,10 @@ services:
       - ./src:/var/www/html
     depends_on:
       - db
+    command: >
+      bash -c "chown -R www-data:www-data /var/www/html &&
+              chmod -R 755 /var/www/html &&
+              apache2-foreground"
 
   db:
     image: mysql:8.0
