@@ -79,6 +79,17 @@ a {
 	background-color: var(--tertiary);
 }
 
+.footer__nav {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-top: 2rem;
+}
+
+.footer__nav a {
+	color: white;
+}
+
 /* Формы */
 .form {
 	background-color: var(--grey);
@@ -239,7 +250,7 @@ section {
 	margin: 60px auto;
 }
 
-select {
+.applications select {
 	padding: 0.5rem 0.75rem;
 	font-size: 1rem;
 	color: var(--white);
