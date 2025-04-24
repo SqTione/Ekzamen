@@ -79,12 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION['user_email'] = $email;
 
 		// Редирект на страницу профиля
-		header('Location: src/views/profile.php');
+		header('Location: ../views/profile.php');
 		exit;
 
 	} catch (PDOException $e) {
 		echo "Ошибка базы данных: " . $e->getMessage();
-		header('Location: src/views/register.php');
+		header('Location: ../views/register.php');
 		exit;
 	}
 }
